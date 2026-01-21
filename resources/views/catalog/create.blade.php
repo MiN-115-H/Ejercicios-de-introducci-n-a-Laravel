@@ -19,7 +19,7 @@
 
                         <div class="form-group">
                             <label for="year">Año de publicación</label>
-                            <input type="date" name="year" id="year" class="form-control">
+                            <input type="number" name="year" id="year" class="form-control">
                         </div>
 
                         <div class="form-group">

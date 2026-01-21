@@ -2,39 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TablaPelicula;
 use Illuminate\Http\Request;
 
 require 'array_peliculas.php';
 
 class CatalogController extends Controller
 {
-
-    private $arrayPeliculas;
-
-    public function __construct()
-    {
-        $this->arrayPeliculas = require base_path('app/Http/Controllers/array_peliculas.php');
-    }
-
     public function getIndex()
     {
-        return view('catalog.index', ['arrayPeliculas' => $this->arrayPeliculas]);
+        $arrayPeliculas = TablaPelicula::all();
+        return view('catalog.index', ['arrayPeliculas' => $arrayPeliculas]);
     }
 
     public function getShow($id)
     {
-        $peliculas = $this->arrayPeliculas;
+        $pelicula = TablaPelicula::findOrFail($id);
 
-        if (!isset($peliculas[$id])) {
-            abort(404);
-        }
-
-        $pelicula = $peliculas[$id];
-
-        return view('catalog.show', [
-            'pelicula' => $pelicula,
-            'id' => $id
-        ]);
+        return view('catalog.show', compact('pelicula'));
     }
 
     public function getCreate()
@@ -44,10 +29,8 @@ class CatalogController extends Controller
 
     public function getEdit($id)
     {
-        $peliculas = $this->arrayPeliculas;
+        $pelicula = TablaPelicula::find($id);
 
-        $pelicula = $peliculas[$id];
-        
         return view('catalog.edit', compact('pelicula', 'id'));
     }
 }
