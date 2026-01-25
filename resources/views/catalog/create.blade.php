@@ -9,9 +9,19 @@
                 </div>
                 <div class="card-body" style="padding:30px">
 
-                    <form method="POST">
+                    <form method="POST" action="{{ route('catalog.create') }}">
                         @csrf
-                        
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="form-group">
                             <label for="title">Título</label>
                             <input type="text" name="title" id="title" class="form-control">

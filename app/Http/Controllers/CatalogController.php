@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TablaPelicula;
 use Illuminate\Http\Request;
-
-require 'array_peliculas.php';
+use Illuminate\Auth\Events\Validated;
 
 class CatalogController extends Controller
 {
@@ -32,5 +31,44 @@ class CatalogController extends Controller
         $pelicula = TablaPelicula::find($id);
 
         return view('catalog.edit', compact('pelicula', 'id'));
+    }
+
+    public function postCreate(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'year' => 'required|integer|max:' . date('Y'),
+            'director' => 'required|string|max:255',
+            'poster' => 'required|url',
+            'synopsis' => 'required|string|min:10',
+        ]);
+
+        TablaPelicula::create([
+            ...$validated,
+            'rented' => false,
+        ]);
+
+        return redirect()
+            ->route('catalog.index')
+            ->with('success', 'Movie added correctly');
+    }
+
+    public function putEdit(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'year' => 'required|integer|max:' . date('Y'),
+            'director' => 'required|string|max:255',
+            'poster' => 'required|url',
+            'synopsis' => 'required|string|min:10',
+        ]);
+
+        $pelicula = TablaPelicula::findorFail($id);
+
+        $pelicula->update($validated);
+
+        return redirect()
+            ->route('catalog.index')
+            ->with('success', 'Movie added correctly');
     }
 }

@@ -23,8 +23,8 @@
         @else
         <button class="btn btn-success">Alquilar pelicula</button>
         @endif
-        <button class="btn btn-warning" onclick="window.location.href='{{route('edit', ['id' => $pelicula->id])}}'">Editar película</button>
-        <button class="btn btn-light" onclick="window.location.href='{{route('index')}}'">Volver al listado</button>
+        <button class="btn btn-warning" onclick="window.location.href='{{route('catalog.edit', ['id' => $pelicula->id])}}'">Editar película</button>
+        <button class="btn btn-light" onclick="window.location.href='{{route('catalog.index')}}'">Volver al listado</button>
     </div>
 </div>
 @stop

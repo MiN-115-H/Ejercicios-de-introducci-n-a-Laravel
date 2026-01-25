@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body" style="padding:30px">
 
-                    <form>
+                    <form method="POST" action="{{route('catalog.update', $pelicula->id)}}">
                         @csrf
                         @method('PUT')
 

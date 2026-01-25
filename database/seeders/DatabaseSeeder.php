@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         self::seedCatalog();
+        self::seedUsers();
         $this->command->info('Tabla catálogo inicializada con datos!');
     }
 
@@ -41,5 +42,19 @@ class DatabaseSeeder extends Seeder
             $p->synopsis = $pelicula['synopsis'];
             $p->save();
         }
+    }
+
+    private function seedUsers(){
+        $admin = new User;
+        $admin->name = 'admin';
+        $admin->email = 'admin@videoclub.com';
+        $admin->password = '123456789';
+        $admin->save();
+
+        $user1 = new User;
+        $user1->name = 'user1';
+        $user1->email = 'user1@videoclub.com';
+        $user1->password = '123456789';
+        $user1->save();
     }
 }
