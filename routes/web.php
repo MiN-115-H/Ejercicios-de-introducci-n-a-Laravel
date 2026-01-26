@@ -15,6 +15,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/catalog/{id}/edit', [CatalogController::class, 'getEdit'])->name('catalog.edit');
     Route::put('/catalog/{id}', [CatalogController::class, 'putEdit'])->name('catalog.update');
 
+    Route::put('/catalog/{id}/rent', [CatalogController::class, 'rentMovie'])->name('catalog.rent');
+    Route::put('/catalog/{id}/return', [CatalogController::class, 'returnMovie'])->name('catalog.return');
+
     Route::get('/catalog/create', [CatalogController::class, 'getCreate'])->name('catalog.create.form');
     Route::post('/catalog/create', [CatalogController::class, 'postCreate'])->name('catalog.create');
 });

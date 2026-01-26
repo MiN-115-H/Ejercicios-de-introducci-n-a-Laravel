@@ -14,6 +14,12 @@ class TablaPelicula extends Model
         'director',
         'poster',
         'rented',
-        'synopsis'
+        'synopsis',
+        'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
